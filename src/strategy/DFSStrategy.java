@@ -8,10 +8,10 @@ import tree.Node;
  * @param <K> 
  * @author Babu
  */
-public class DFSStrategy<K> implements ITreeStrategy<K> {    
-     protected Stack<Node> stack;
+public class DFSStrategy<K extends Comparable,T> implements ITreeStrategy<K,T> {    
+     protected Stack<Node<K,T>> stack;
 
-    public DFSStrategy(Stack<Node> stack) {
+    public DFSStrategy(Stack<Node<K,T>> stack) {
         this.stack=stack;
     }
 
@@ -22,10 +22,10 @@ public class DFSStrategy<K> implements ITreeStrategy<K> {
     
 
     @Override
-    public Node search(Object key, Node root) {
+    public Node<K,T> search(K key, Node<K,T> root) {
         stack.push(root);
         while (!stack.isEmpty()) {
-            Node n=stack.pop();
+            Node<K,T> n=stack.pop();
             if(key.equals(n.getKey())){
                 return n;
             }
@@ -38,10 +38,10 @@ public class DFSStrategy<K> implements ITreeStrategy<K> {
     }
 
     @Override
-    public void print(Node root) {
+    public void print(Node<K,T> root) {
         stack.push(root); 
         while (!stack.isEmpty()) {
-            Node n=stack.pop(); 
+            Node<K,T> n=stack.pop(); 
             n.printNode();
             if(!n.isLeaf()){
                 stack.push(n.getRight());

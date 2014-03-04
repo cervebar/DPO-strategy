@@ -6,8 +6,8 @@ package tree;
  * @param <T> 
  * @author Babu
  */
-public class NullNode<K extends Comparable,T>  extends Node {
-    private static NullNode instance;
+public class NullNode<K extends Comparable,T>  extends Node<K,T> {
+    private static NullNode<?,?> instance;
 
     private NullNode() {        
         this.leaf=true;       
@@ -15,7 +15,7 @@ public class NullNode<K extends Comparable,T>  extends Node {
     }
     public static NullNode getInstance(){
         if(instance==null){
-            instance=new NullNode();
+            instance=new NullNode<>();
         }
         return instance;
     }
@@ -43,16 +43,16 @@ public class NullNode<K extends Comparable,T>  extends Node {
     }    
     
     @Override
-    public Node getLeft() {
+    public Node<K,T> getLeft() {
         return this;
     }
 
     @Override
-    public void setLeft(Node left) {        
+    public void setLeft(Node<K,T> left) {        
     }
 
     @Override
-    public Node getRight() {
+    public Node<K,T> getRight() {
         return this;
     }    
 
@@ -67,6 +67,10 @@ public class NullNode<K extends Comparable,T>  extends Node {
     }    
 
     @Override
-    public void setRight(Node right) {       
+    public void setRight(Node<K,T> right) {       
     }
+    
+    public boolean isNullNode() {
+		return true;
+	}
 }

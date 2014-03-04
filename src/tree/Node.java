@@ -3,19 +3,19 @@ package tree;
 /**
  *
  * @param <K> key
- * @param <T> value,tah can be printed
+ * @param <T> value,that can be printed
  * @author Babu
  */
 public class Node<K extends Comparable,T> {
 
-    protected Node left, right;
+    protected Node<K,T> left, right;
     protected T value;
     protected K key;
     protected int level;
     protected boolean leaf;
 
     public Node(K key,T value) {    
-        this.left = NullNode.getInstance();
+        this.left =  NullNode.getInstance();
         this.right = NullNode.getInstance();
         this.value=value;
         this.key=key;
@@ -47,15 +47,15 @@ public class Node<K extends Comparable,T> {
     }
     
     
-    public Node getLeft() {
+    public Node<K,T> getLeft() {
         return left;
     }
 
-    public void setLeft(Node left) {
+    public void setLeft(Node<K,T> left) {
         this.left = left;
     }
 
-    public Node getRight() {
+    public Node<K,T> getRight() {
         return right;
     }
 
@@ -83,8 +83,11 @@ public class Node<K extends Comparable,T> {
         this.level = level;
     }
 
-    public void setRight(Node right) {
+    public void setRight(Node<K,T> right) {
         this.right = right;
     }
+	public boolean isNullNode() {
+		return false;
+	}
      
 }

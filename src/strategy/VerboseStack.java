@@ -8,8 +8,11 @@ import java.util.Stack;
  * @author Babu
  */
 public class VerboseStack<E> extends Stack<E>{
+  
+	
+	private static final long serialVersionUID = 1901254160727328721L;
 
-    /**
+	/**
      * 
      * @param item
      * @return

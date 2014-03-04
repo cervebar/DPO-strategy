@@ -6,7 +6,7 @@ import tree.Node;
  * @param <K> key to search
  * @author Babu
  */
-public interface ITreeStrategy<K> {
+public interface ITreeStrategy<K extends Comparable,T> {
 
     /**
      * Search for node asociated with the key
@@ -14,7 +14,7 @@ public interface ITreeStrategy<K> {
      * @param root the first node to start
      * @return 
      */
-    Node search(K key, Node root);
+    Node<K,T> search(K key, Node<K,T> root);
     
-    void print(Node root);
+    void print(Node<K,T> root);
 }

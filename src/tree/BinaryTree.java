@@ -12,22 +12,22 @@ import strategy.ITreeStrategy;
 public class BinaryTree<K extends Comparable, T> {
 
     private Node<K, T> root;
-    ITreeStrategy treeStrategy;
+    ITreeStrategy<K,T> treeStrategy;
     protected int level = 0;
 
-    public BinaryTree(ITreeStrategy searchStrategy) {
+    public BinaryTree(ITreeStrategy<K,T> searchStrategy) {
         this.root = NullNode.getInstance();
         this.treeStrategy = searchStrategy;
     }
 
     public void add(K key, T value) {
-        Node node = new Node(key, value);
+        Node<K,T> node = new Node<K,T>(key, value);
         root = addToTree(root, node);
     }
 
-    protected Node addToTree(Node node, Node newNode) {
+    protected Node<K,T> addToTree(Node<K,T> node, Node<K,T> newNode) {
         level++;
-        if (node instanceof NullNode) {
+        if (node.isNullNode()) {
             node = newNode;
             node.setLevel(level);
             level = 0;
@@ -41,7 +41,7 @@ public class BinaryTree<K extends Comparable, T> {
         return node;
     }
 
-    public Node find(K key) {
+    public Node<K,T> find(K key) {
         return treeStrategy.search(key, root);
     }
     
@@ -54,7 +54,7 @@ public class BinaryTree<K extends Comparable, T> {
         printNode(root);
     }
 
-    protected void printNode(Node node) {
+    protected void printNode(Node<K,T> node) {
         System.out.println(node);
         if (!node.isLeaf()) {
             printNode(node.getLeft());        

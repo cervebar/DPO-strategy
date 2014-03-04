@@ -8,11 +8,11 @@ import tree.Node;
  * @param <K>  
  * @author Babu
  */
-public class BFSStrategy<K> implements ITreeStrategy<K> {
+public class BFSStrategy<K extends Comparable,T> implements ITreeStrategy<K,T> {
 
-    private LinkedList<Node> fifo;
+    private LinkedList<Node<K,T>> fifo;
 
-    public BFSStrategy(LinkedList<Node> fifo) {
+    public BFSStrategy(LinkedList<Node<K,T>> fifo) {
         this.fifo = fifo;
     }
 
@@ -22,10 +22,10 @@ public class BFSStrategy<K> implements ITreeStrategy<K> {
     
 
     @Override
-    public Node search(Object key, Node root) {
+    public Node<K,T> search(K key, Node<K,T> root) {
         fifo.add(root);
         while (!fifo.isEmpty()) {
-            Node n = fifo.removeFirst();
+            Node<K,T> n = fifo.removeFirst();
             if (key.equals(n.getKey())) {
                 return n;
             }
@@ -40,10 +40,10 @@ public class BFSStrategy<K> implements ITreeStrategy<K> {
     }
 
     @Override
-    public void print(Node root) {
+    public void print(Node<K,T> root) {
         fifo.add(root);
         while (!fifo.isEmpty()) {
-            Node n = fifo.removeFirst();
+            Node<K,T> n = fifo.removeFirst();
             n.printNode();
             if(!n.isLeaf()){            
             fifo.add(n.getLeft());

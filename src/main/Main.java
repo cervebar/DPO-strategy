@@ -14,8 +14,8 @@ import tree.Node;
  */
 public class Main {
     
-    public static void serachMain(String[] args){
-        ITreeStrategy strategy;
+    public static void searchMain(String[] args){
+        ITreeStrategy<String, TestClass> strategy;
         String strategyName,key;
 
         try {
@@ -27,10 +27,10 @@ public class Main {
         }
         switch (strategyName) {
             case "DFS":
-                strategy = new DFSStrategy<>(new VerboseStack<Node>());
+                strategy = new DFSStrategy<>(new VerboseStack<Node<String, TestClass>>());
                 break;
             case "BFS":
-                strategy = new BFSStrategy(new VerboseFifo<Node>());
+                strategy = new BFSStrategy<>(new VerboseFifo<Node<String, TestClass>>());
                 break;
             default:
                 System.out.println("No valid strategy name");
@@ -41,7 +41,7 @@ public class Main {
         filltree(myBinaryTree);
        
         System.out.println("FIND choosen strategy is "+strategyName+"=========");
-        Node n = myBinaryTree.find(key);
+        Node<String,TestClass> n = myBinaryTree.find(key);
         System.out.println("RESULT============================================");
         if (n != null) {
             System.out.println("For key:\"" + key + "\" was found this node");
@@ -53,7 +53,7 @@ public class Main {
     
 
     public static void printMain(String[] args){
-        ITreeStrategy strategy;
+        ITreeStrategy<String, TestClass> strategy;
         String strategyName;
 
         try {
@@ -83,11 +83,13 @@ public class Main {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-       // serachMain(args);
-        printMain(args);
+    	args = new String[]{"BFS","a"};
+    	args = new String[]{"DFS","a"};
+        searchMain(args);
+      // printMain(args);    
     }
 
-    private static void filltree(BinaryTree<String, TestClass> myBinaryTree) {
+	private static void filltree(BinaryTree<String, TestClass> myBinaryTree) {
         myBinaryTree.add("a", new TestClass(1, "jednicka"));
         myBinaryTree.add("e", new TestClass(2, "dvojka"));
         myBinaryTree.add("g", new TestClass(3, "trojka"));
